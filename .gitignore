@@ -1,0 +1,37 @@
+target/
+.mvn
+mvnw*
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+*.log*
+/.integration-scripts
+
+.DS_Store
+/*/target
+/log*
+/*/log
+
+files/
+old/
+src/test/resources/test.properties
