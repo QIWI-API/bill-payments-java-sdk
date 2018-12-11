@@ -6,7 +6,7 @@
 
     <groupId>com.qiwi</groupId>
     <artifactId>bill-payments-java-sdk</artifactId>
-    <version>1.0.0</version>
+    <version>1.3.0</version>
 
     <name>bill-payments-java-sdk</name>
     <description>QIWI payments Java SDK</description>
