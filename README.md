@@ -1,5 +1,8 @@
 # Universal payments API Java SDK
 
+[![Build Status](https://travis-ci.com/QIWI-API/bill-payments-java-sdk.svg?branch=master)](https://travis-ci.com/QIWI-API/bill-payments-java-sdk)
+[![Maven Central](https://img.shields.io/maven-central/v/com.qiwi/bill-payments-java-sdk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.qiwi%22%20AND%20a:%22bill-payments-java-sdk%22)
+
 Java SDK модуль для внедрения единого платежного протокола эквайринга и QIWI Кошелька.
 
 ## Подключение
