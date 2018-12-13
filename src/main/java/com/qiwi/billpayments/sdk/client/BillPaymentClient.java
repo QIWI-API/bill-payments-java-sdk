@@ -24,16 +24,15 @@ public class BillPaymentClient {
     private static final String AUTHORIZATION_PREFIX = "Bearer ";
     private static final String CLIENT_NAME = "java_sdk";
     private static final String BILLS_URL = "https://api.qiwi.com/partner/bill/v1/bills/";
-    private static final String PAYMENT_URL = "ttps://oplata.qiwi.com/create";
+    private static final String PAYMENT_URL = "https://oplata.qiwi.com/create";
 
-    private final WebClient webClient;
+    private final String appVersion = PomInfo.VERSION;
+    private final RequestMappingIntercessor requestMappingIntercessor;
     private final Map<String, String> headers;
-    private final String appVersion;
 
     public BillPaymentClient(String secretKey, WebClient webClient) {
-        this.webClient = webClient;
         this.headers = prepareHeaders(secretKey);
-        this.appVersion = PomInfo.VERSION;
+        this.requestMappingIntercessor = new RequestMappingIntercessor(webClient);
     }
 
     static Map<String, String> prepareHeaders(String bearerToken) {
@@ -45,7 +44,7 @@ public class BillPaymentClient {
     }
 
     public BillResponse createBill(CreateBillInfo info) throws URISyntaxException {
-        BillResponse response = webClient.doRequest(
+        BillResponse response = requestMappingIntercessor.request(
                 "PUT",
                 BILLS_URL + info.getBillId(),
                 Optional.of(appendCustomFields(info)),
@@ -71,7 +70,7 @@ public class BillPaymentClient {
     }
 
     public BillResponse getBillInfo(String billId) {
-        return webClient.doRequest(
+        return requestMappingIntercessor.request(
                 "GET",
                 BILLS_URL + billId,
                 Optional.empty(),
@@ -81,7 +80,7 @@ public class BillPaymentClient {
     }
 
     public BillResponse cancelBill(String billId) {
-        return webClient.doRequest(
+        return requestMappingIntercessor.request(
                 "POST",
                 BILLS_URL + billId + "/reject",
                 Optional.empty(),
@@ -91,7 +90,7 @@ public class BillPaymentClient {
     }
 
     public RefundResponse refundBill(String billId, String refundId, MoneyAmount amount) {
-        return webClient.doRequest(
+        return requestMappingIntercessor.request(
                 "PUT",
                 BILLS_URL + billId + "/refunds/" + refundId,
                 Optional.of(new RefundBillRequest(amount)),
@@ -101,7 +100,7 @@ public class BillPaymentClient {
     }
 
     public RefundResponse getRefundInfo(String billId, String refundId) {
-        return webClient.doRequest(
+        return requestMappingIntercessor.request(
                 "GET",
                 BILLS_URL + billId + "/refunds/" + refundId,
                 Optional.empty(),

@@ -1,56 +1,69 @@
 package com.qiwi.billpayments.sdk.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qiwi.billpayments.sdk.exception.HttpException;
+import com.qiwi.billpayments.sdk.exception.ApacheHttpClientException;
 import com.qiwi.billpayments.sdk.exception.UrlEncodingException;
+import com.qiwi.billpayments.sdk.model.ResponseData;
 import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 
 public class ApacheWebClient implements WebClient {
-    private final ObjectMapper mapper;
     private final HttpClient httpClient;
 
-    public ApacheWebClient(HttpClient httpClient, ObjectMapper objectMapper) {
-        this.mapper = objectMapper;
+    public ApacheWebClient(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
     @Override
-    public <T> T doRequest(
+    public ResponseData request(
             String method,
             String url,
-            Optional<Object> entityOpt,
-            Class<T> responseClass,
+            Optional<String> entityOpt,
             Map<String, String> headers
     ) {
         try {
-            BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest(method, url);
-            headers.forEach(request::addHeader);
-            entityOpt.ifPresent(entity -> {
-                try {
-                    String json = mapper.writeValueAsString(entity);
-                    request.setEntity(new StringEntity(json));
-                } catch (IOException e) {
-                    throw new HttpException(e);
-                }
-            });
+            HttpRequest request = buildRequest(method, url, entityOpt, headers);
             HttpResponse response = httpClient.execute(extractHost(url), request);
-            return mapper.readValue(
-                    response.getEntity().getContent(),
-                    responseClass
-            );
+
+            try (InputStream is = response.getEntity().getContent();
+                 InputStreamReader reader = new InputStreamReader(is);
+                 BufferedReader bufferedReader = new BufferedReader(reader)) {
+
+                return new ResponseData(
+                        bufferedReader.readLine(),
+                        response.getStatusLine().getStatusCode()
+                );
+            }
         } catch (IOException e) {
-            throw new HttpException(e);
+            throw new ApacheHttpClientException(e);
         }
+    }
+
+    private HttpRequest buildRequest(
+            String method,
+            String url,
+            Optional<String> entityOpt,
+            Map<String, String> headers
+    ) {
+        BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest(method, url);
+        headers.forEach(request::addHeader);
+        entityOpt.map(e -> new StringEntity(e, StandardCharsets.UTF_8))
+                .ifPresent(request::setEntity);
+
+        return request;
     }
 
     private HttpHost extractHost(String baseUrl) {
