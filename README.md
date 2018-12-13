@@ -307,11 +307,10 @@ BillPaymentsUtils.checkNotificationSignature(validSignature, notification, merch
 
 ```java
 public interface WebClient {
-    <T> T doRequest(
+    ResponseData request(
             String method,
             String url,
-            Optional<Object> entityOpt,
-            Class<T> responseClass,
+            Optional<String> entityOpt,
             Map<String, String> headers
     );
 }
@@ -322,10 +321,7 @@ public interface WebClient {
 ```java
 BillPaymentClient client = BillPaymentClientFactory.createCustom(
                 secretKey,
-                new ApacheWebClient(
-                        HttpClients.createDefault(),
-                        ObjectMapperFactory.create()
-                )
+                new ApacheWebClient(HttpClients.createDefault())
 );
 ```
 
