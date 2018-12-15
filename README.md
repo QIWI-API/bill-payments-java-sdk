@@ -261,7 +261,7 @@ RefundResponse refundResponse = client.refundBill(paidBillId, refundId, amount);
 
 ```java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
-String refundId = '3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b';
+String refundId = "3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b";
 
 RefundResponse response = client.getRefundInfo(paidBillId, refundId);
 ```
