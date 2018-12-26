@@ -224,11 +224,7 @@ public class BillPaymentsSdkTest {
                 ),
                 "test",
                 ZonedDateTime.now().plusDays(45),
-                new Customer(
-                        "test@test.ru",
-                        "user uid on your side",
-                        "79999999999"
-                ),
+                null,
                 "http://test.ru/"
         );
     }
