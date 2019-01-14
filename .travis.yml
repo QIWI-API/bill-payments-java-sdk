@@ -1,25 +1,4 @@
 language: java
 script: ignore
-env:
-  global:
-    - USER="xrtm000"
-    - EMAIL="xrtm000@gmail.com"
-    - ORGANIZATION="QIWI-API"
-    - REPO="bill-payments-java-sdk"
-    - GH_REPO="github.com/${ORGANIZATION}/${REPO}.git"
-    - NEW_VERSION="1.$TRAVIS_BUILD_NUMBER.0"
-    - GITHUB_PATH="https://${USER}:${GITHUB_TOKEN}@${GH_REPO}"
 install:
   - mvn test -Dqiwi.client.test.secret.key=${QIWI_CLIENT_TEST_SECRET_KEY} -Dqiwi.client.test.public.key=${QIWI_CLIENT_TEST_PUBLIC_KEY} -Dqiwi.client.test.bill-id-for-refund=${QIWI_CLIENT_TEST_BILL_ID_FOR_REFUND} -B
-after_success:
-  - git clone ${GITHUB_PATH} ${REPO}
-  - cd ${REPO}
-  - git remote rm origin
-  - git remote add origin ${GITHUB_PATH}
-  - git config --global user.email ${EMAIL}
-  - git config --global user.name ${USER}
-  - git checkout master
-  - mvn versions:set -DnewVersion=${NEW_VERSION} versions:commit -B
-  - git add .
-  - git commit --message "Bump version to $NEW_VERSION [skip travis]"
-  - git push origin master
