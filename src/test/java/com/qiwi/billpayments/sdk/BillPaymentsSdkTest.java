@@ -175,7 +175,7 @@ public class BillPaymentsSdkTest {
         String paidBillId = configuration.getBillIdForRefund();
         String refundId = "e5ac6a59-2d69-48f1-b338-78d50bd718c6";
         MoneyAmount amount = new MoneyAmount(
-                BigDecimal.valueOf(10.00),
+                BigDecimal.valueOf(0.01),
                 Currency.getInstance("RUB")
         );
 
