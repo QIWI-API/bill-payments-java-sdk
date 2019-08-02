@@ -90,8 +90,8 @@ public class BillPaymentsSdkNegativeScenariosTest {
         } catch (BadResponseException e) {
             //then
             Assert.assertEquals(
-                    "client should get status unprocessable entity",
-                    HttpStatus.SC_UNPROCESSABLE_ENTITY,
+                    "client should get status bad request",
+                    HttpStatus.SC_BAD_REQUEST,
                     e.getHttpStatus()
             );
         }
