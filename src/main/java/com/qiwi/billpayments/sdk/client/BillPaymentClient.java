@@ -65,7 +65,7 @@ public class BillPaymentClient {
     private CreateBillRequest appendCustomFields(CreateBillInfo info) {
         return CreateBillRequest.create(
                 info,
-                new CustomFields(CLIENT_NAME, appVersion)
+                new CustomFields(CLIENT_NAME, appVersion, null)
         );
     }
 
