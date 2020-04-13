@@ -13,7 +13,7 @@ Java SDK модуль для внедрения единого платежно�
 <dependency>
     <groupId>com.qiwi</groupId>
     <artifactId>bill-payments-java-sdk</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.0</version>
 </dependency>
 ```
 
