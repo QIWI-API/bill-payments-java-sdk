@@ -19,7 +19,8 @@ Java SDK модуль для внедрения единого платежно�
 
 ## Документация
 
-**API QIWI Кассы**: https://developer.qiwi.com/ru/bill-payments
+**API P2P-счетов (для физических лиц)**: https://developer.qiwi.com/ru/p2p-payments
+**API QIWI Кассы (для юридических лиц)**: https://developer.qiwi.com/ru/bill-payments
 
 ## Авторизация
 
