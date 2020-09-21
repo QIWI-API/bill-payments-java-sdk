@@ -289,7 +289,7 @@ RefundResponse response = client.getRefundInfo(paidBillId, refundId);
 Метод `checkNotificationSignature` осуществляет проверку подписи при нотификации о новом счете от сервера уведомлений QIWI. Принимает на вход подпись из входящего запроса, объект - тело запроса и secret ключ, с помощью которого должна осуществляться подпись:
 
 ```java
-String merchantSecret = "test-merchant-secret-for-signature-check";
+String secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************";
 Notification notification = new Notification(
         new Bill(
                 "test",
@@ -304,7 +304,7 @@ Notification notification = new Notification(
 );
 String validSignature = "07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b";
 
-BillPaymentsUtils.checkNotificationSignature(validSignature, notification, merchantSecret); //true
+BillPaymentsUtils.checkNotificationSignature(validSignature, notification, secretKey); //true
 ```
 
 ### Использование альтернативного HTTP-клиента
