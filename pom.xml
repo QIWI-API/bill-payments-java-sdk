@@ -54,7 +54,7 @@
 
     <properties>
         <httpclient.version>4.5.6</httpclient.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <jackson.version>2.9.9</jackson.version>
         <jackson-databind.version>2.10.0.pr1</jackson-databind.version>
     </properties>
