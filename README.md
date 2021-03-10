@@ -144,8 +144,6 @@ BillResponse response = client.createBill(billInfo);
 В параметрах нужно указать идентификатор счета `billId` внутри вашей системы, в результате будет получен ответ со статусом счета.
 Подробнее в документации — [для физ.лиц](https://developer.qiwi.com/ru/p2p-payments/#invoice-status), [для юр.лиц](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
 
-```php
-
 ```java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
 
@@ -186,7 +184,7 @@ BillResponse response = client.getBillInfo(billId);
 
 Метод `cancelBill` отменяет неоплаченный счет.
 В параметрах нужно указать идентификатор счета `billId` внутри вашей системы, в результате будет получен ответ с информацией о счете.
-Подробнее в документации — [для физ.лиц](https://developer.qiwi.com/ru/p2p-payments/#invoice-status), [для юр.лиц](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
+Подробнее в документации — [для физ.лиц](https://developer.qiwi.com/ru/p2p-payments/#cancel), [для юр.лиц](https://developer.qiwi.com/ru/bill-payments/#cancel).
 
 ```php
 
