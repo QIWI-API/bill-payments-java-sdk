@@ -60,7 +60,8 @@ public class BillPaymentClientTest {
                 ZonedDateTime.now(),
                 ZonedDateTime.now(),
                 "http://test.ru/",
-                new CustomFields("client", "version", null)
+                new CustomFields("client", "version", null),
+                "79999999999"
         );
 
         //when
