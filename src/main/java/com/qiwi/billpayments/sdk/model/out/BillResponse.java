@@ -19,6 +19,7 @@ public class BillResponse {
     private final ZonedDateTime expirationDateTime;
     private final String payUrl;
     private final CustomFields customFields;
+    private final String recipientPhoneNumber;
 
     @JsonCreator
     public BillResponse(
@@ -31,7 +32,8 @@ public class BillResponse {
             @JsonProperty("creationDateTime") ZonedDateTime creationDateTime,
             @JsonProperty("expirationDateTime") ZonedDateTime expirationDateTime,
             @JsonProperty("payUrl") String payUrl,
-            @JsonProperty("customFields") CustomFields customFields
+            @JsonProperty("customFields") CustomFields customFields,
+            @JsonProperty("recipientPhoneNumber") String recipientPhoneNumber
     ) {
         this.siteId = siteId;
         this.billId = billId;
@@ -43,6 +45,7 @@ public class BillResponse {
         this.expirationDateTime = expirationDateTime;
         this.payUrl = payUrl;
         this.customFields = customFields;
+        this.recipientPhoneNumber = recipientPhoneNumber;
     }
 
     public BillResponse withNewPayUrl(String payUrl) {
@@ -56,7 +59,8 @@ public class BillResponse {
                 this.creationDateTime,
                 this.expirationDateTime,
                 payUrl,
-                this.customFields
+                this.customFields,
+                this.recipientPhoneNumber
         );
     }
 
